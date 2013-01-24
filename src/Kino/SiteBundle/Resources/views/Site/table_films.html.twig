@@ -1,0 +1,21 @@
+{% block table_films %} 
+<input type="hidden" id="SortField" name="SortField" value="{{ SortField }}" />
+<input type="hidden" id="SortOrder" name="SortOrder" value="{{ SortOrder }}" />
+<table cellspacing="0" cellpadding="0" border="0" class="films body">
+    <tbody>
+            {% for item in films %}
+            <tr>
+                <td class="pos">{{item.historyPosition }}.</td>
+                <td class="photo">
+                    <a href="/web/kinosite/img_site/{{item.id}}_big.jpg" class="gallery" rel="gal">
+                        <img src="/web/kinosite/img_site/{{item.id}}.jpg" name="{{item.history_position }}" alt="{{item.films_name}}" />
+                    </a>
+                </td>
+                <td class="name">{{item.filmName}} ({{item.filmYear }})</td>
+                <td class="votes">{{item.historyVotes }}</td>
+                <td class="rating">{{item.historyRating }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

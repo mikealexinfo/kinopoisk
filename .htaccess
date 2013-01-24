@@ -1,0 +1,13 @@
+Options +FollowSymlinks
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteBase /
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+#	RewriteRule ^(.*)$ /web/app_dev.php/
+	
+	RewriteRule ^(/)?(.*)$ /web/app.php/$2 [QSA,PT,L]
+	RewriteRule ^/?$ /web/app.php/ [QSA,PT,L]
+</IfModule>

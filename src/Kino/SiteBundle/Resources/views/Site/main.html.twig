@@ -1,0 +1,96 @@
+{% extends "KinoSiteBundle::layout.html.twig" %}
+
+{% block content %}
+<div id="top_banner">
+    <a href="/"><img src="/web/kinosite/img/top_banner.png"></a>
+</div>
+<div id="header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody>
+            <tr>
+                <td class="top_left" valign="top"><div id="logotip"><a href="/"></a></div></td>
+                <td class="top_center" align="center" valign="top">&nbsp;</td>
+                <td class="top_right" align="left" valign="top"><div style="position:relative;">
+                        <div id="phone_form">XXXXXXXXXXX, X <br>
+                            тел.: +X (XXX) </div>
+                        <div id="phone_form1">XXX-XX-XX</div>
+                        <div id="work_time">&nbsp;&nbsp;&nbsp;&nbsp;Время работы:<br>
+                            Будни с X:XX до XX:XX</div>
+                    </div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- #header-->
+
+<div id="middle">
+    <div class="mytemplate">
+        <div id="films_table">
+            <br/>
+            <h1>{{ name }}</h1>
+            <br/>
+            <form action="" method="post">
+                Выбрать дату: <input type="text" id="GetDates" name="GetDates" value="{{ post_date }}" />
+                <table cellspacing="0" cellpadding="0" border="0" class="films head">
+                    <tbody>
+                        <tr>
+                            <td class="pos">№</td>
+                            <td class="photo">Фото</td>
+                            <td class="name" sort="name">
+                                Наименование
+                                <a class="sort asc" tp="asc" href="?SortField=name&SortOrder=asc">
+                                    <img src="/web/kinosite/img/arrow_up_gray.png" />
+                                </a>
+                                <a class="sort desc" tp="desc" href="?SortField=name&SortOrder=desc">
+                                    <img src="/web/kinosite/img/arrow_down_gray.png" />
+                                </a>
+                            </td>
+                            <td class="votes voices" sort="voices">
+                                Голосов
+                                <a class="sort asc" tp="asc" href="?SortField=voices&SortOrder=asc">
+                                    <img src="/web/kinosite/img/arrow_up_gray.png" />
+                                </a>
+                                <a class="sort desc" tp="desc" href="?SortField=voices&SortOrder=desc">
+                                    <img src="/web/kinosite/img/arrow_down_gray.png" />
+                                </a>
+                            </td>
+                            <td class="rating" sort="rating">
+                                Рейтинг
+                                <a class="sort asc" tp="asc" href="?SortField=rating&SortOrder=asc">
+                                    <img src="/web/kinosite/img/arrow_up_gray.png" />
+                                </a>
+                                <a class="sort desc" tp="desc" href="?SortField=rating&SortOrder=desc">
+                                    <img src="/web/kinosite/img/arrow_down_gray.png" />
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="films">{% include "KinoSiteBundle:Site:table_films.html.twig" %}</div>
+            </form>	  
+        </div>
+    </div>
+    <!-- #container--> 
+
+</div>
+<!-- #middle-->
+
+<div class="bootom_tempalte">
+    <div id="footer">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tbody>
+                <tr>
+                    <td class="bottom_left" valign="bottom">&nbsp;</td>
+                    <td class="bottom_center">&nbsp;</td>
+                    <td class="bottom_right"><div class="bottom_right_pic">&nbsp;</div></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+ {% endblock %}

@@ -1,0 +1,16 @@
+/web/bundles/*
+/web/kinosite/img_site/*
+/web/tmp/*
+/web/config.php
+/app/SymfonyRequirements.php
+/app/check.php
+/app/bootstrap*
+/app/bootstrap.php.cache
+/app/cache/*
+/app/logs/*
+/vendor/
+/app/config/parameters.ini
+/app/config/parameters.yml
+/nbproject/
+/composer.lock
+/composer.phar

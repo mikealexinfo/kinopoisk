@@ -1,0 +1,7 @@
+parameters:
+#    kino_site.example.class: Kino\SiteBundle\Example
+
+services:
+#    kino_site.example:
+#        class: %kino_site.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
