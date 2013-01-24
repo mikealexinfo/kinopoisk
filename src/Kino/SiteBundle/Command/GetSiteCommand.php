@@ -42,8 +42,6 @@ class GetSiteCommand extends ContainerAwareCommand
         $histManager = new \Kino\SiteBundle\HistoryManager($em);
 
         $repos = $em->getRepository('KinoSiteBundle:History');
-        $output->writeln($mas);
-
         foreach ($mas as $item) {
             $ms = $repos
                     ->getFilmIdAsMas($item);
