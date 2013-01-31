@@ -34,8 +34,8 @@ class Grabber
         if (!is_dir($local_path . 'web/tmp')) {
             mkdir($local_path . 'web/tmp');
         }
-        if (!is_dir($local_path . 'web/kinosite/img_site/')) {
-            mkdir($local_path . 'web/kinosite/img_site/');
+        if (!is_dir($local_path . 'web/bundles/kinosite/img_site/')) {
+            mkdir($local_path . 'web/bundles/kinosite/img_site/');
         }
 
 
@@ -78,7 +78,7 @@ class Grabber
                 , 'film_link' => $link
                 , 'film_img' => $local_path . 'web/tmp/temp_big' . $arr_link[2] . '.jpg'
                 , 'film_imgthumb' => $local_path . 'web/tmp/temp' . $arr_link[2] . '.jpg'
-                , 'local' => $local_path . 'web/kinosite/img_site/'
+                , 'local' => $local_path . 'web/bundles/kinosite/img_site/'
             );
         }
 

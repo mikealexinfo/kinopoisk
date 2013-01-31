@@ -2,7 +2,7 @@
 
 {% block content %}
 <div id="top_banner">
-    <a href="/"><img src="/web/kinosite/img/top_banner.png"></a>
+    <a href=""><img src="{{ asset('bundles/kinosite/img/top_banner.png') }}"></a>
 </div>
 <div id="header">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -39,28 +39,28 @@
                             <td class="name" sort="name">
                                 Наименование
                                 <a class="sort asc" tp="asc" href="?SortField=name&SortOrder=asc">
-                                    <img src="/web/kinosite/img/arrow_up_gray.png" />
+                                    <img src="{{ asset('bundles/kinosite/img/arrow_up_gray.png') }}" />
                                 </a>
                                 <a class="sort desc" tp="desc" href="?SortField=name&SortOrder=desc">
-                                    <img src="/web/kinosite/img/arrow_down_gray.png" />
+                                    <img src="{{ asset('bundles/kinosite/img/arrow_down_gray.png') }}" />
                                 </a>
                             </td>
                             <td class="votes voices" sort="voices">
                                 Голосов
                                 <a class="sort asc" tp="asc" href="?SortField=voices&SortOrder=asc">
-                                    <img src="/web/kinosite/img/arrow_up_gray.png" />
+                                    <img src="{{ asset('bundles/kinosite/img/arrow_up_gray.png') }}" />
                                 </a>
                                 <a class="sort desc" tp="desc" href="?SortField=voices&SortOrder=desc">
-                                    <img src="/web/kinosite/img/arrow_down_gray.png" />
+                                    <img src="{{ asset('bundles/kinosite/img/arrow_down_gray.png') }}" />
                                 </a>
                             </td>
                             <td class="rating" sort="rating">
                                 Рейтинг
                                 <a class="sort asc" tp="asc" href="?SortField=rating&SortOrder=asc">
-                                    <img src="/web/kinosite/img/arrow_up_gray.png" />
+                                    <img src="{{ asset('bundles/kinosite/img/arrow_up_gray.png') }}" />
                                 </a>
                                 <a class="sort desc" tp="desc" href="?SortField=rating&SortOrder=desc">
-                                    <img src="/web/kinosite/img/arrow_down_gray.png" />
+                                    <img src="{{ asset('bundles/kinosite/img/arrow_down_gray.png') }}" />
                                 </a>
                             </td>
                         </tr>

@@ -7,8 +7,8 @@
             <tr>
                 <td class="pos">{{item.historyPosition }}.</td>
                 <td class="photo">
-                    <a href="/web/kinosite/img_site/{{item.id}}_big.jpg" class="gallery" rel="gal">
-                        <img src="/web/kinosite/img_site/{{item.id}}.jpg" name="{{item.history_position }}" alt="{{item.films_name}}" />
+                    <a href="{{ asset('bundles/kinosite/img_site/') }}{{item.id}}_big.jpg" class="gallery" rel="gal">
+                        <img src="{{ asset('bundles/kinosite/img_site/') }}{{item.id}}.jpg" name="{{item.history_position }}" alt="{{item.films_name}}" />
                     </a>
                 </td>
                 <td class="name">{{item.filmName}} ({{item.filmYear }})</td>

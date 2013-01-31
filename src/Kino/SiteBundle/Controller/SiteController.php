@@ -26,7 +26,8 @@ class SiteController extends Controller
                     ->getRepository('KinoSiteBundle:History')
                     ->getFilm($dates, array(
                         'SortField'=>$this->getRequest()->get('SortField', '')
-                      , 'SortOrder'=>$this->getRequest()->get('SortOrder', ''))
+                      , 'SortOrder'=>$this->getRequest()->get('SortOrder', '')
+                      )
                     ),
             'post_date' => $dates
         );
@@ -50,7 +51,7 @@ class SiteController extends Controller
                                     ->getFilm($dates, array(
                                                         'SortField' => ($this->getRequest()->get('SortField', '')),
                                                         'SortOrder' => ($this->getRequest()->get('SortOrder', ''))
-                                                                        )),
+                                                        )),
                                                         'post_date' => $dates,
                                                         'SortField' => ($this->getRequest()->get('SortField', '')),
                                                         'SortOrder' => ($this->getRequest()->get('SortOrder', ''))

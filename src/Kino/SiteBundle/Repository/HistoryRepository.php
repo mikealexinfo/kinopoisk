@@ -59,6 +59,17 @@ class HistoryRepository extends EntityRepository
     //Метод выполняет следующие действия: Проверяет наличие фильма в базе, ID фильма по передаваемым параметрам (название и год выпуска)
     public function getFilmIdAsMas($mas)
     {
+/*
+        $repository = $this->getDoctrine()
+                           ->getRepository('KinoSiteBundle:Film');
+        $query = $repository->createQueryBuilder('f')
+                            ->where('p.price > :price')
+                            ->setParameter('price', '19.99')
+                            ->orderBy('p.price', 'ASC')
+                            ->getQuery();
+
+        $film = $query->getResult();
+*/        
         return $this
                 ->getEntityManager()
                 ->createQuery("SELECT 
