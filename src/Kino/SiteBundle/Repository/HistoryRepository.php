@@ -11,97 +11,97 @@ class HistoryRepository extends EntityRepository
 {
     public function getOrder($field, $ord)
     {
-        $order = "order by ";
+        $order = array('field'=>'h.historyPosition', 'order'=>'ASC');
         switch ($field) {
             case 'rating':
-                $order .= "h.historyRating";
+                $order['field'] = "h.historyRating";
                 break;
             case 'voices':
-                $order .= "h.historyVotes";
+                $order['field'] = "h.historyVotes";
                 break;
             case 'name':
-                $order .= "f.filmName";
+                $order['field'] = "f.filmName";
                 break;
-            default: $order .= "h.historyPosition";
         }
         switch ($ord) {
             case 'asc':
-                $order .= " asc";
+                $order['order'] = " asc";
                 break;
             case 'desc':
-                $order .= " desc";
+                $order['order'] = " desc";
                 break;
-            default: $order .= " asc";
         }
         return $order;
     }
 
     // Метод выполняет следующие действия: Получает список фильмов из базы данных
-    public function getFilm($getDates, $orders = array())
+    public function getFilm($getDates, $orders = array('SortField'=>'', 'SortOrder'=>''))
     {
-        $order = $this
-                  ->getOrder($orders['SortField'], $orders['SortOrder']);
-        return $this
-                ->getEntityManager()
-                ->createQuery("SELECT 
-                                    h.historyPosition,
-                                    h.historyVotes,
-                                    h.historyRating,
-                                    f.filmName,
-                                    f.filmYear,
-                                    f.id 
-                                 FROM KinoSiteBundle:History h JOIN  h.film f 
-                                WHERE h.historyDate = :Getdates " . $order)
-                ->setParameter('Getdates', $getDates)
-                ->getResult();
+        $repository = $this
+                        ->getEntityManager();
+        $ord = $this->getOrder($orders['SortField'], $orders['SortOrder']);
+        
+        $query = $repository->createQueryBuilder('h')
+                            ->select(array('h.historyPosition',
+                                           'h.historyVotes',
+                                           'h.historyRating',
+                                           'f.filmName',
+                                           'f.filmYear',
+                                           'f.id'
+                                          )
+                                    )
+                            ->from('KinoSiteBundle:History', 'h')
+                            ->innerJoin('KinoSiteBundle:Film', 'f')
+                            ->where("h.film = f.id")
+                            ->andWhere("h.historyDate = :historyDate")
+                            ->setParameter('historyDate', $getDates)
+                            ->addOrderBy($ord['field'], $ord['order'])
+                            ->getQuery()
+                            ;
+        return $query->getResult();
     }
 
     //Метод выполняет следующие действия: Проверяет наличие фильма в базе, ID фильма по передаваемым параметрам (название и год выпуска)
     public function getFilmIdAsMas($mas)
     {
-/*
-        $repository = $this->getDoctrine()
-                           ->getRepository('KinoSiteBundle:Film');
+        $repository = $this
+                        ->getEntityManager()
+                        ->getRepository('KinoSiteBundle:Film');
         $query = $repository->createQueryBuilder('f')
-                            ->where('p.price > :price')
-                            ->setParameter('price', '19.99')
-                            ->orderBy('p.price', 'ASC')
-                            ->getQuery();
+                            ->select(array('count(f.id)',
+                                           'f.id'
+                                          )
+                                    )
+                            ->where("f.filmName = :films")
+                            ->andWhere("f.filmYear = :year")
+                            ->setParameter('films', $mas['film_name'])
+                            ->setParameter('year', $mas['film_year'])
+                            ->setMaxResults(1)
+                            ->getQuery()
+                            ;
 
-        $film = $query->getResult();
-*/        
-        return $this
-                ->getEntityManager()
-                ->createQuery("SELECT 
-                                    count(f.id),
-                                    f.id
-                                 FROM KinoSiteBundle:Film f 
-                                WHERE f.filmName = :films
-                                        AND f.filmYear = :year ")
-                ->setParameters(array(
-                            'films' => $mas['film_name'],
-                            'year' => $mas['film_year']
-                        )
-                   )
-                ->setMaxResults(1)
-                ->getSingleResult();
+        return $query->setMaxResults(1)->getSingleResult();
     }
 
     //Метод выполняет следующие действия: Проверяет наличие истории для конкретного фильма на заданную дату, ID фильма по передаваемым параметрам (фильм ID и ДатаИстории)
     public function getHistoryIdAsMas($mas)
     {
+        $repository = $this
+                        ->getEntityManager()
+                        ->getRepository('KinoSiteBundle:History');
+        $query = $repository->createQueryBuilder('h')
+                            ->select(array('count(h.id)',
+                                           'h.id'
+                                          )
+                                    )
+                            ->where("h.film = :films")
+                            ->andWhere("h.historyDate = :date")
+                            ->setParameter('films', $mas['films_id'])
+                            ->setParameter('date', $mas['date_history'])
+                            ->setMaxResults(1)
+                            ->getQuery()
+                            ;
 
-        return $this
-                ->getEntityManager()
-                ->createQuery("SELECT 
-                                    count(h.id), 
-                                    h.id 
-                                 FROM KinoSiteBundle:History h 
-                                WHERE h.film = :films 
-                                        AND h.historyDate = :date ")
-                ->setParameters(array('films' => $mas['films_id'],
-                                      'date' => $mas['date_history']))
-                ->setMaxResults(1)
-                ->getSingleResult();
+        return $query->setMaxResults(1)->getSingleResult();
     }
 }

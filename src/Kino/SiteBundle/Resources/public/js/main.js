@@ -7,7 +7,7 @@ function getDateFunc(){
         var SortOrder = ( $('#SortOrder').val()!='' ? '&SortOrder='+$('#SortOrder').val() : ''  );
         $.ajax({
                    type: "POST",
-                   url: "/ajax/refresh",
+                   url: "ajax/refresh",
                    data: "GetDates=" + $('#GetDates').val() + SortField + SortOrder
                             
 //                         + "&SortField=name&SortOrder=asc"

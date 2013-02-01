@@ -37,11 +37,12 @@ class GetSiteCommand extends ContainerAwareCommand
     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+//        $mas = Grabber::getSite();
         $em = $this->getContainer()->get('doctrine')->getEntityManager('default');
-        $mas = Grabber::getSite();
         $histManager = new \Kino\SiteBundle\HistoryManager($em);
 
         $repos = $em->getRepository('KinoSiteBundle:History');
+/*
         foreach ($mas as $item) {
             $ms = $repos
                     ->getFilmIdAsMas($item);
@@ -50,8 +51,8 @@ class GetSiteCommand extends ContainerAwareCommand
             if ($ms[1] < 1) {
                 $film_id = $histManager
                         ->createFilm(array(
-                    'films_name' => $item['film_name'],
-                    'films_year' => $item['film_year']
+                            'films_name' => $item['film_name'],
+                            'films_year' => $item['film_year']
                         )
                 );
             } else {
@@ -77,6 +78,15 @@ class GetSiteCommand extends ContainerAwareCommand
                         )
                 );
             }
+        }
+  */
+        
+//        $arr = $repos->getHistoryIdAsMas(array( 'films_id'=>'11', 'date_history'=>'2013-02-01'));
+        $arr = $repos->getFilm('2013-02-01');
+        $output->writeln('-' . $arr . '-');
+//        $output->writeln('');
+        foreach ($arr as $k=>$v) {
+            $output->writeln($k . '-' . $v . '-');
         }
         $output->writeln('Ok');
     }
