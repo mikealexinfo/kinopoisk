@@ -58,6 +58,8 @@ class HistoryRepository extends EntityRepository
                             ->addOrderBy($ord['field'], $ord['order'])
                             ->getQuery()
                             ;
+        $query->useResultCache(true, 3600, 'somecache_id');
+        
         return $query->getResult();
     }
 
