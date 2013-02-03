@@ -40,7 +40,6 @@ class HistoryRepository extends EntityRepository
         $repository = $this
                         ->getEntityManager();
         $ord = $this->getOrder($orders['SortField'], $orders['SortOrder']);
-        
         $query = $repository->createQueryBuilder('h')
                             ->select(array('h.historyPosition',
                                            'h.historyVotes',
@@ -57,9 +56,8 @@ class HistoryRepository extends EntityRepository
                             ->setParameter('historyDate', $getDates)
                             ->addOrderBy($ord['field'], $ord['order'])
                             ->getQuery()
+                            ->useResultCache(true, 300)
                             ;
-        $query->useResultCache(true, 3600, 'somecache_id');
-        
         return $query->getResult();
     }
 
