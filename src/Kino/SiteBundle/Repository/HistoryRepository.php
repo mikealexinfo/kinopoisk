@@ -58,6 +58,22 @@ class HistoryRepository extends EntityRepository
                             ->getQuery()
                             ->useResultCache(true, 300)
                             ;
+/*
+        $ret = array();
+        $start = microtime(true);
+        for ($i = 1; $i <= 50; $i++) {
+            $time_start = microtime(true);
+
+//            $query = $em->createQuery('SELECT p FROM AcmeProductBundle:Product p WHERE p.id = 1');
+            $products = $query->getResult();
+
+            $time_end = microtime(true);
+            $ret[$i] = $time_end - $time_start;
+            echo $i . '-' . $ret[$i] . '<br/>';
+        }
+        $end = microtime(true);
+        $ret['Total'] = $end - $start;
+*/
         return $query->getResult();
     }
 
@@ -78,6 +94,7 @@ class HistoryRepository extends EntityRepository
                             ->setParameter('year', $mas['film_year'])
                             ->setMaxResults(1)
                             ->getQuery()
+                            ->useResultCache(true, 300)
                             ;
 
         return $query->setMaxResults(1)->getSingleResult();
@@ -100,6 +117,7 @@ class HistoryRepository extends EntityRepository
                             ->setParameter('date', $mas['date_history'])
                             ->setMaxResults(1)
                             ->getQuery()
+                            ->useResultCache(true, 300)
                             ;
 
         return $query->setMaxResults(1)->getSingleResult();

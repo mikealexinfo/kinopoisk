@@ -25,4 +25,13 @@ class FilmTest extends PHPUnit_Framework_TestCase
 
         assertEquals('Test', $film->getFilmName());
     }
+
+    public function testFilmYear()
+    {
+        $film = $this->film;
+
+        assertSame($film, $film->setFilmYear(2012));
+
+        assertEquals(2012, $film->getFilmYear());
+    }
 }

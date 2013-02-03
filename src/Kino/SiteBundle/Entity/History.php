@@ -65,13 +65,6 @@ class History
     private $historyDate;
     
     /**
-     * @var film
-     *
-     * @var Kino\SiteBundle\Entity\Film
-     */
-//    private $film;
-
-    /**
      *
      * @return integer 
      */
