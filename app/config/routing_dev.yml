@@ -1,6 +1,6 @@
-KinoSiteBundle:
-    resource: "@KinoSiteBundle/Controller"
-    type:     annotation
+# KinoSiteBundle:
+#    resource: "@KinoSiteBundle/Controller"
+#    type:     annotation
 
 _wdt:
     resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"
@@ -14,5 +14,5 @@ _configurator:
     resource: "@SensioDistributionBundle/Resources/config/routing/webconfigurator.xml"
     prefix:   /_configurator
 
-# _main:
-#     resource: routing.yml
+_main:
+    resource: routing.yml
