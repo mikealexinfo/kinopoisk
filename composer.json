@@ -1,6 +1,6 @@
 {
-    "name": "symfony/framework-standard-edition",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "name": "kino/kinopoisk",
+    "description": "kinopoisk.ru grabber",
     "autoload": {
         "psr-0": { "": "src/" }
     },
@@ -23,13 +23,11 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
         ],
         "post-update-cmd": [
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"

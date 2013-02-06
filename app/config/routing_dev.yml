@@ -1,7 +1,3 @@
-# KinoSiteBundle:
-#    resource: "@KinoSiteBundle/Controller"
-#    type:     annotation
-
 _wdt:
     resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"
     prefix:   /_wdt
