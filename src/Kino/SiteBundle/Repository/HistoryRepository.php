@@ -42,8 +42,16 @@ class HistoryRepository extends EntityRepository
         return $order;
     }
 
-    // Метод выполняет следующие действия: Получает список фильмов из базы данных
-    public function getFilm($getDates, $orders = array('SortField'=>'', 'SortOrder'=>''))
+    /**
+     * Метод получает список фильмов из базы данных по заданным входным
+     * параметрам
+     * 
+     * @param type $getDates
+     * @param type $orders
+     * @return type
+     */
+    public function getFilm($getDates,
+                            $orders = array('SortField'=>'', 'SortOrder'=>''))
     {
         $repository = $this
                         ->getEntityManager();
@@ -69,7 +77,13 @@ class HistoryRepository extends EntityRepository
         return $query->getResult();
     }
 
-    //Метод выполняет следующие действия: Проверяет наличие фильма в базе, ID фильма по передаваемым параметрам (название и год выпуска)
+    /**
+     * Метод проверяет наличие фильма в базе,
+     * ID фильма по передаваемым параметрам (название и год выпуска)
+     * 
+     * @param type $data
+     * @return type
+     */
     public function getFilmIdAsMas($data)
     {
         $repository = $this
@@ -92,7 +106,13 @@ class HistoryRepository extends EntityRepository
         return $query->setMaxResults(1)->getSingleResult();
     }
 
-    //Метод выполняет следующие действия: Проверяет наличие истории для конкретного фильма на заданную дату, ID фильма по передаваемым параметрам (фильм ID и ДатаИстории)
+    /**
+     * Метод проверяет наличие истории для конкретного фильма на заданную дату,
+     * ID фильма по передаваемым параметрам (фильм ID и ДатаИстории)
+     * 
+     * @param type $data
+     * @return type
+     */
     public function getHistoryIdAsMas($data)
     {
         $repository = $this
