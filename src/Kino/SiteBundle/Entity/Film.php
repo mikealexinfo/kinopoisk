@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping\OneToMany;
  * @ORM\Table(name="film",
  *           uniqueConstraints={@UniqueConstraint(name="films_name_uniq",columns={"filmName","filmYear"})}
  * )
- * 
+ *
  * Kino\SiteBundle\Entity\Film
  */
 class Film
@@ -24,31 +24,31 @@ class Film
      * @var integer $id
      */
     private $id;
-    
+
     /**
      * @ORM\Column(type="string", length=100)
-     * 
+     *
      * @var string $filmName
      */
     private $filmName;
-    
+
     /**
      * @ORM\Column(type="integer")
-     * 
+     *
      * @var integer $filmYear
      */
     private $filmYear;
-    
+
     /**
     * @OneToMany(targetEntity="History", mappedBy="film_id")
     */
     private $history;
-   
+
     /**
-     * 
+     *
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -58,7 +58,7 @@ class Film
     /**
      * Set filmName
      *
-     * @param string $filmName
+     * @param  string $filmName
      * @return Film
      */
     public function setFilmName($filmName)
@@ -71,7 +71,7 @@ class Film
     /**
      * Get filmName
      *
-     * @return string 
+     * @return string
      */
     public function getFilmName()
     {
@@ -81,7 +81,7 @@ class Film
     /**
      * Set filmYear
      *
-     * @param integer $filmYear
+     * @param  integer $filmYear
      * @return Film
      */
     public function setFilmYear($filmYear)
@@ -94,7 +94,7 @@ class Film
     /**
      * Get filmYear
      *
-     * @return integer 
+     * @return integer
      */
     public function getFilmYear()
     {

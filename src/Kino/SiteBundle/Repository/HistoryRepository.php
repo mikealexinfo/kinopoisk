@@ -5,7 +5,6 @@ namespace Kino\SiteBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use Kino\SiteBundle\Entity\Film;
 use Kino\SiteBundle\Entity\History;
-use Kino\SiteBundle\Grabber;
 
 class HistoryRepository extends EntityRepository
 {
@@ -31,6 +30,7 @@ class HistoryRepository extends EntityRepository
                 $order['order'] = " desc";
                 break;
         }
+
         return $order;
     }
 
@@ -74,6 +74,7 @@ class HistoryRepository extends EntityRepository
         $end = microtime(true);
         $ret['Total'] = $end - $start;
 */
+
         return $query->getResult();
     }
 

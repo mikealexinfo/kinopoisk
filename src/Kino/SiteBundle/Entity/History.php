@@ -11,8 +11,8 @@ use Doctrine\ORM\Mapping\ManyToOne;
  * @ORM\Table(name="history",
  *           uniqueConstraints={@UniqueConstraint(name="hist_film_uniq",columns={"historyDate","filmId"})}
  * )
- * @ORM\Entity(repositoryClass="Kino\SiteBundle\Repository\HistoryRepository") 
- * 
+ * @ORM\Entity(repositoryClass="Kino\SiteBundle\Repository\HistoryRepository")
+ *
  * Kino\SiteBundle\Entity\History
  */
 class History
@@ -21,7 +21,7 @@ class History
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
-     * 
+     *
      * @var integer $id
      */
     private $id;
@@ -35,38 +35,38 @@ class History
      * })
      */
     private $film;
-    
+
     /**
      * @ORM\Column(type="integer")
-     * 
+     *
      * @var integer $historyPosition
      */
     private $historyPosition;
 
     /**
      * @ORM\Column(type="integer")
-     * 
+     *
      * @var integer $historyVotes
      */
     private $historyVotes;
 
     /**
      * @ORM\Column(type="float")
-     * 
+     *
      * @var double $historyRating
      */
     private $historyRating;
-    
+
     /**
      * @ORM\Column(type="date")
-     * 
+     *
      * @var \DateTime $historyDate
      */
     private $historyDate;
-    
+
     /**
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -76,7 +76,7 @@ class History
     /**
      * Set historyPosition
      *
-     * @param integer $historyPosition
+     * @param  integer $historyPosition
      * @return History
      */
     public function setHistoryPosition($historyPosition)
@@ -89,7 +89,7 @@ class History
     /**
      * Get historyPosition
      *
-     * @return integer 
+     * @return integer
      */
     public function getHistoryPosition()
     {
@@ -99,7 +99,7 @@ class History
     /**
      * Set historyVotes
      *
-     * @param integer $historyVotes
+     * @param  integer $historyVotes
      * @return History
      */
     public function setHistoryVotes($historyVotes)
@@ -112,7 +112,7 @@ class History
     /**
      * Get historyVotes
      *
-     * @return integer 
+     * @return integer
      */
     public function getHistoryVotes()
     {
@@ -122,7 +122,7 @@ class History
     /**
      * Set historyRating
      *
-     * @param double $historyRating
+     * @param  double  $historyRating
      * @return History
      */
     public function setHistoryRating($historyRating)
@@ -135,7 +135,7 @@ class History
     /**
      * Get historyRating
      *
-     * @return double 
+     * @return double
      */
     public function getHistoryRating()
     {
@@ -145,7 +145,7 @@ class History
     /**
      * Set historyDate
      *
-     * @param \DateTime $historyDate
+     * @param  \DateTime $historyDate
      * @return History
      */
     public function setHistoryDate($historyDate)
@@ -158,7 +158,7 @@ class History
     /**
      * Get historyDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getHistoryDate()
     {
@@ -168,7 +168,7 @@ class History
     /**
      * Set film
      *
-     * @param Kino\SiteBundle\Entity\Film $film
+     * @param  Kino\SiteBundle\Entity\Film $film
      * @return History
      */
     public function setFilm(\Kino\SiteBundle\Entity\Film $film = null)
@@ -181,7 +181,7 @@ class History
     /**
      * Get film
      *
-     * @return Kino\SiteBundle\Entity\Film 
+     * @return Kino\SiteBundle\Entity\Film
      */
     public function getFilm()
     {

@@ -23,7 +23,7 @@ class HistoryTest extends PHPUnit_Framework_TestCase
         $history = $this->history;
 
         assertSame($history, $history->setHistoryPosition(10) );
-        
+
         assertEquals(10, $history->getHistoryPosition());
     }
 
@@ -32,7 +32,7 @@ class HistoryTest extends PHPUnit_Framework_TestCase
         $history = $this->history;
 
         assertSame($history, $history->setHistoryRating(3.58) );
-        
+
         assertEquals(3.58, $history->getHistoryRating() );
     }
 
@@ -41,7 +41,7 @@ class HistoryTest extends PHPUnit_Framework_TestCase
         $history = $this->history;
 
         assertSame($history, $history->setHistoryVotes(100000) );
-        
+
         assertEquals(100000, $history->getHistoryVotes());
     }
 
@@ -50,7 +50,7 @@ class HistoryTest extends PHPUnit_Framework_TestCase
         $history = $this->history;
 
         assertSame($history, $history->setHistoryDate('2013-01-01') );
-        
+
         assertEquals('2013-01-01', $history->getHistoryDate());
     }
 
@@ -60,7 +60,7 @@ class HistoryTest extends PHPUnit_Framework_TestCase
         $film = new Film();
 
         assertSame($history, $history->setHistoryDate($film) );
-        
+
         assertEquals($film, $history->getHistoryDate());
     }
 }

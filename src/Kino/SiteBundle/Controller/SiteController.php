@@ -3,7 +3,6 @@
 namespace Kino\SiteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Kino\SiteBundle\Grabber;
 // these import the "@Route" and "@Template" annotations
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -61,8 +60,8 @@ class SiteController extends Controller
             default:
                 return '';
         }
+
         return $this->render('KinoSiteBundle:Site:index.html.twig', array('name' => $name));
     }
 
 }
-?>

@@ -38,7 +38,6 @@ class Grabber
             mkdir($local_path . 'web/bundles/kinosite/img_site/');
         }
 
-
         $crawler = new Crawler($file);
         $films = array();
         $num = 0;

@@ -1,29 +1,25 @@
 <?php
-/* -------------------------------------------------------------
-  Модуль консольной команды
-  Формирует консольную команду kino:getsite, которая
-  позволяет вызвать функцию обращения к сайту кинопоиска из консоли
-
-  Возможно выполнение команды через скрипт, а как следствие,
-  можно настроить cron на выполнение скрипта
-------------------------------------------------------------- */
 
 namespace Kino\SiteBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Kino\SiteBundle\Repository\HistoryRepository;
 use Kino\SiteBundle\Grabber;
 
+/**
+ * Модуль консольной команды. Формирует консольную команду kino:getsite, которая позволяет вызвать функцию обращения к
+ * сайту кинопоиска из консоли.
+ *
+ * Возможно выполнение команды через скрипт, а как следствие, можно настроить cron на выполнение скрипта.
+ */
 class GetSiteCommand extends ContainerAwareCommand
 {
     /*
-    Конфигуратор выполняемой команды kino:getsite
-    Команда не имеет параметров
-    */
+     * Конфигуратор выполняемой команды kino:getsite.
+     *
+     * Команда не имеет параметров.
+     */
     protected function configure()
     {
         $this
@@ -33,8 +29,8 @@ class GetSiteCommand extends ContainerAwareCommand
     }
 
     /*
-    Функция исполнения команды kino:getsite
-    */
+     * Функция исполнения команды kino:getsite
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $mas = Grabber::getSite();
@@ -58,12 +54,12 @@ class GetSiteCommand extends ContainerAwareCommand
             } else {
                 $film_id = $ms['id'];
             }
-            
+
             copy($item['film_imgthumb'], $item['local'] . $film_id . '.jpg');
             copy($item['film_img'], $item['local'] . $film_id . '_big.jpg');
 
             $ms_h = $repos
-                    ->getHistoryIdAsMas(array('films_id' => $film_id, 
+                    ->getHistoryIdAsMas(array('films_id' => $film_id,
                                               'date_history' => date("Y-m-d")));
 
             if ($ms_h[1] < 1) {
@@ -80,7 +76,7 @@ class GetSiteCommand extends ContainerAwareCommand
             }
         }
 //  */
-        
+
 //        $arr = $repos->getHistoryIdAsMas(array( 'films_id'=>'11', 'date_history'=>'2013-02-01'));
 //        $arr = $repos->getFilm('2013-02-01');
 //        $output->writeln('-' . $arr . '-');
@@ -91,4 +87,3 @@ class GetSiteCommand extends ContainerAwareCommand
         $output->writeln('Ok');
     }
 }
-?>
