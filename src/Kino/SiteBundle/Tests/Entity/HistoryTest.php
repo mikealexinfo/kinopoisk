@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\DemoBundle\Tests\Controller;
+namespace Kino\SiteBundle\Tests\Controller;
 
 require_once 'PHPUnit/Framework/Assert/Functions.php';
 

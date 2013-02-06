@@ -8,6 +8,14 @@ use Kino\SiteBundle\Entity\History;
 
 class HistoryRepository extends EntityRepository
 {
+    /**
+     * Метод формирует массив фильтра/сортировки для запроса по входным
+     * параметрам с сайта
+     * 
+     * @param type $field
+     * @param type $ord
+     * @return string
+     */
     public function getOrder($field, $ord)
     {
         $order = array('field'=>'h.historyPosition', 'order'=>'ASC');
@@ -58,28 +66,11 @@ class HistoryRepository extends EntityRepository
                             ->getQuery()
                             ->useResultCache(true, 300)
                             ;
-/*
-        $ret = array();
-        $start = microtime(true);
-        for ($i = 1; $i <= 50; $i++) {
-            $time_start = microtime(true);
-
-//            $query = $em->createQuery('SELECT p FROM AcmeProductBundle:Product p WHERE p.id = 1');
-            $products = $query->getResult();
-
-            $time_end = microtime(true);
-            $ret[$i] = $time_end - $time_start;
-            echo $i . '-' . $ret[$i] . '<br/>';
-        }
-        $end = microtime(true);
-        $ret['Total'] = $end - $start;
-*/
-
         return $query->getResult();
     }
 
     //Метод выполняет следующие действия: Проверяет наличие фильма в базе, ID фильма по передаваемым параметрам (название и год выпуска)
-    public function getFilmIdAsMas($mas)
+    public function getFilmIdAsMas($data)
     {
         $repository = $this
                         ->getEntityManager()
@@ -91,8 +82,8 @@ class HistoryRepository extends EntityRepository
                                     )
                             ->where("f.filmName = :films")
                             ->andWhere("f.filmYear = :year")
-                            ->setParameter('films', $mas['film_name'])
-                            ->setParameter('year', $mas['film_year'])
+                            ->setParameter('films', $data['film_name'])
+                            ->setParameter('year', $data['film_year'])
                             ->setMaxResults(1)
                             ->getQuery()
                             ->useResultCache(true, 300)
@@ -102,7 +93,7 @@ class HistoryRepository extends EntityRepository
     }
 
     //Метод выполняет следующие действия: Проверяет наличие истории для конкретного фильма на заданную дату, ID фильма по передаваемым параметрам (фильм ID и ДатаИстории)
-    public function getHistoryIdAsMas($mas)
+    public function getHistoryIdAsMas($data)
     {
         $repository = $this
                         ->getEntityManager()
@@ -114,8 +105,8 @@ class HistoryRepository extends EntityRepository
                                     )
                             ->where("h.film = :films")
                             ->andWhere("h.historyDate = :date")
-                            ->setParameter('films', $mas['films_id'])
-                            ->setParameter('date', $mas['date_history'])
+                            ->setParameter('films', $data['films_id'])
+                            ->setParameter('date', $data['date_history'])
                             ->setMaxResults(1)
                             ->getQuery()
                             ->useResultCache(true, 300)

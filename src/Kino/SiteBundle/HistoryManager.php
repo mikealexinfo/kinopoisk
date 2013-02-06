@@ -10,15 +10,20 @@ class HistoryManager
         $this->em = $em;
     }
 
-    // Метод выполняет следующие действия: Создает фильм в базе данных
-    public function createFilm($mas)
+    /**
+     * Метод создает в БД запись в таблице Film
+     * 
+     * @param type $data
+     * @return type
+     */
+    public function createFilm($data)
     {
         $films = new Entity\Film();
-        if (isset($mas['films_name'])) {
-            $films->setFilmName($mas['films_name']);
+        if (isset($data['films_name'])) {
+            $films->setFilmName($data['films_name']);
         }
-        if (isset($mas['films_year'])) {
-            $films->setFilmYear($mas['films_year']);
+        if (isset($data['films_year'])) {
+            $films->setFilmYear($data['films_year']);
         }
 
         $em = $this->em;
@@ -30,7 +35,10 @@ class HistoryManager
     }
 
     /**
-     * Метод создает истрию для фильма
+     * Метод создает запись в таблице истории для фильма
+     * 
+     * @param type $data
+     * @return type
      */
     public function createHistory($data)
     {
@@ -51,11 +59,11 @@ class HistoryManager
 
         $em = $this->em;
         if (isset($data['films_id'])) {
-            $films_id = $em
+            $filmsId = $em
                     ->getRepository('KinoSiteBundle:Film')
                     ->find($data['films_id']);
 
-            $history->setFilm($films_id);
+            $history->setFilm($filmsId);
         }
 
         $em->persist($history);
