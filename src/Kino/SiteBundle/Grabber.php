@@ -76,16 +76,16 @@ class Grabber
             mkdir($local_path . 'web/bundles/kinosite/img_site/');
         }
 
-        $crawler = new Crawler($file);
-        $films = array();
-        $num = 0;
-        $voices = null;
-        $year = null;
+        $crawler = $this->crawlerFactory->createCrawlerFor($file);
+        $films   = array();
+        $matches = null;
+        $voices  = null;
+        $year    = null;
 
         for ($i = 1; $i <= 10; $i++) {
             $tr[$i] = $crawler->filter('#top250_place_' . $i);
 
-            preg_match('/.*(?=(\.))/', $tr[$i]->children()->eq(0)->text(), $num);
+            preg_match('/.*(?=(\.))/', $tr[$i]->children()->eq(0)->text(), $matches);
             $nm = $tr[$i]->filter('a.all')->eq(0)->text();
             $link = $tr[$i]->filter('a.all')->attr('href');
             preg_match('/[^(]*.(?=(\)))/', $tr[$i]->children()->eq(2)->filter('span')->text(), $voices);
@@ -106,7 +106,7 @@ class Grabber
             copy($img_path, $local_path . 'web/tmp/temp_big' . $arr_link[2] . '.jpg');
 
             $films[$i - 1] = array(
-                'film_pos' => trim($num[0])
+                'film_pos' => trim($matches[0])
                 , 'film_name' => $string
                 , 'film_year' => trim($year[0])
                 , 'film_rate' => $rating
