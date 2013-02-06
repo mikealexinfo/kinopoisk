@@ -6,30 +6,36 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class Grabber
 {
-    /*
-      Функция закачки странички кинопоиска и парсинга данных этой страницы.
-      Возвращает массив данных следующего вида.
-      array(
-      [0] => array(
-      'film_pos'      => Номер по порядку(место) в рейтинге
-      , 'film_name'     => Наименование фильма
-      , 'film_year'     => Год выпуска фильма
-      , 'film_rate'     => Рейтинг фильма
-      , 'film_voic'     => Количество отданых голосов
-      , 'film_sitename' => Адрес сайта
-      , 'film_link'     => Ссылка на детальные данные
-      , 'film_img'      => Изображение фильма
-      , 'film_imgthumb' => Малое изображение фильма
-      , 'local'         => Локальный каталог для картинок
-      )
-      ... и т.д.
-      )
+    /**
+     * Функция закачки странички кинопоиска и парсинга данных этой страницы.
+     *
+     * Возвращает массив данных следующего вида:
+     *
+     * <code>
+     * array(
+     * [0] => array(
+     * 'film_pos'      => Номер по порядку (место) в рейтинге
+     * , 'film_name'     => Наименование фильма
+     * , 'film_year'     => Год выпуска фильма
+     * , 'film_rate'     => Рейтинг фильма
+     * , 'film_voic'     => Количество отданых голосов
+     * , 'film_sitename' => Адрес сайта
+     * , 'film_link'     => Ссылка на детальные данные
+     * , 'film_img'      => Изображение фильма
+     * , 'film_imgthumb' => Малое изображение фильма
+     * , 'local'         => Локальный каталог для картинок
+     * )
+     * // ... и т.д.
+     * )
+     * </code>
      */
-    public static function getSite()
+    public function getSite()
     {
         $sitename = "http://kinopoisk.ru";
         $filename = $sitename . "/level/20/";
         $file = file_get_contents($filename);
+
+        // TODO Extract to separate class (ThumbnailManager).
         $local_path = realpath(dirname(__FILE__)) . '/../../../';
         if (!is_dir($local_path . 'web/tmp')) {
             mkdir($local_path . 'web/tmp');

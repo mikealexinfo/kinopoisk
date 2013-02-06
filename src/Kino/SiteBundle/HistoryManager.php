@@ -29,29 +29,31 @@ class HistoryManager
         return $films->getId();
     }
 
-    //Метод выполняет следующие действия: Создает истрию для фильма
-    public function createHistory($mas)
+    /**
+     * Метод создает истрию для фильма
+     */
+    public function createHistory($data)
     {
         $history = new Entity\History();
 
-        if (isset($mas['historyPosition'])) {
-            $history->setHistoryPosition($mas['historyPosition']);
+        if (isset($data['historyPosition'])) {
+            $history->setHistoryPosition($data['historyPosition']);
         }
-        if (isset($mas['historyVotes'])) {
-            $history->setHistoryVotes($mas['historyVotes']);
+        if (isset($data['historyVotes'])) {
+            $history->setHistoryVotes($data['historyVotes']);
         }
-        if (isset($mas['historyRating'])) {
-            $history->setHistoryRating($mas['historyRating']);
+        if (isset($data['historyRating'])) {
+            $history->setHistoryRating($data['historyRating']);
         }
-        if (isset($mas['historyDate'])) {
-            $history->setHistoryDate($mas['historyDate']);
+        if (isset($data['historyDate'])) {
+            $history->setHistoryDate($data['historyDate']);
         }
 
         $em = $this->em;
-        if (isset($mas['films_id'])) {
+        if (isset($data['films_id'])) {
             $films_id = $em
                     ->getRepository('KinoSiteBundle:Film')
-                    ->find($mas['films_id']);
+                    ->find($data['films_id']);
 
             $history->setFilm($films_id);
         }
@@ -62,5 +64,4 @@ class HistoryManager
 
         return $history->getId();
     }
-
 }
