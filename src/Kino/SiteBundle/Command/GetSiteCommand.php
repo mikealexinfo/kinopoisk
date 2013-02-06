@@ -5,7 +5,6 @@ namespace Kino\SiteBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Kino\SiteBundle\Grabber;
 
 /**
  * Модуль консольной команды. Формирует консольную команду kino:getsite, которая позволяет вызвать функцию обращения к
@@ -33,20 +32,20 @@ class GetSiteCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $grabber = new Grabber();
-
-        $films = $grabber->getSite();
-
+        $grabber           = $this->getContainer()->get('kino.grabber');
         $entityManager     = $this->getContainer()->get('doctrine')->getEntityManager('default');
+        // TODO To DIC.
         $historyManager    = new \Kino\SiteBundle\HistoryManager($entityManager);
         $historyRepository = $entityManager->getRepository('KinoSiteBundle:History');
 
+        $films = $grabber->getSite();
+
         foreach ($films as $item) {
-            $ms = $historyRepository->getFilmIdAsMas($item);
+            $film = $historyRepository->getFilmIdAsMas($item);
 
             $filmId = 0;
 
-            if ($ms[1] < 1) {
+            if ($film[1] < 1) {
                 $filmId = $historyManager
                         ->createFilm(array(
                             'films_name' => $item['film_name'],
@@ -54,20 +53,21 @@ class GetSiteCommand extends ContainerAwareCommand
                         )
                 );
             } else {
-                $filmId = $ms['id'];
+                $filmId = $film['id'];
             }
 
             copy($item['film_imgthumb'], $item['local'] . $filmId . '.jpg');
             copy($item['film_img'], $item['local'] . $filmId . '_big.jpg');
 
-            $ms_h = $historyRepository->getHistoryIdAsMas(
+            // TODO Внутри getSingleResult(), нужен catch на исключение!
+            $history = $historyRepository->getHistoryIdAsMas(
                 array(
                     'films_id' => $filmId,
                     'date_history' => date("Y-m-d")
                 )
             );
 
-            if ($ms_h[1] < 1) {
+            if ($history[1] < 1) {
                 $historyId = $historyManager->createHistory(
                     array(
                         'films_id'        => $filmId,

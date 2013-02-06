@@ -1,5 +1,5 @@
 {
-    "hash": "4bd5c0550c18bf38e63c8451711dc656",
+    "hash": "080bb7d1238588418984ee7f9e8e0821",
     "packages": [
         {
             "name": "doctrine/common",
@@ -1094,6 +1094,49 @@
             "keywords": [
                 "mock",
                 "xunit"
+            ]
+        },
+        {
+            "name": "sensio/buzz-bundle",
+            "version": "v0.2",
+            "target-dir": "Sensio/Bundle/BuzzBundle",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/sensio/SensioBuzzBundle",
+                "reference": "v0.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/sensio/SensioBuzzBundle/archive/v0.2.zip",
+                "reference": "v0.2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "kriswallsmith/buzz": ">= 0.6"
+            },
+            "time": "2012-05-28 07:08:44",
+            "type": "symfony-bundle",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Sensio\\Bundle\\BuzzBundle": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marc Weistroff",
+                    "email": "marc.weistroff@sensio.com"
+                }
+            ],
+            "description": "Bundle around the Buzz HTTP client",
+            "homepage": "https://github.com/sensio/SensioBuzzBundle",
+            "keywords": [
+                "http client",
+                "buzz"
             ]
         },
         {

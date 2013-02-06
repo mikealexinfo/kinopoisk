@@ -4,8 +4,40 @@ namespace Kino\SiteBundle;
 
 use Symfony\Component\DomCrawler\Crawler;
 
+use Buzz\Browser;
+
+use JMS\DiExtraBundle\Annotation as DI;
+
+/**
+ * @DI\Service("kino.grabber")
+ */
 class Grabber
 {
+    /**
+     * @var \Kino\SiteBundle\CrawlerFactory
+     */
+    private $crawlerFactory;
+
+    /**
+     * @var \Buzz\Browser
+     */
+    private $browser;
+
+    /**
+     * @DI\InjectParams({
+     *     "browser"        = @DI\Inject("buzz"),
+     *     "crawlerFactory" = @DI\Inject("kino.crawler_factory")
+     * })
+     *
+     * @param \Buzz\Browser                   $browser
+     * @param \Kino\SiteBundle\CrawlerFactory $crawlerFactory
+     */
+    public function __construct(Browser $browser = null, CrawlerFactory $crawlerFactory = null)
+    {
+        $this->browser        = ($browser ?: new Browser());
+        $this->crawlerFactory = ($crawlerFactory ?: new CrawlerFactory());
+    }
+
     /**
      * Функция закачки странички кинопоиска и парсинга данных этой страницы.
      *
@@ -33,7 +65,7 @@ class Grabber
     {
         $sitename = "http://kinopoisk.ru";
         $filename = $sitename . "/level/20/";
-        $file = file_get_contents($filename);
+        $file = $this->browser->get($filename)->getContent();
 
         // TODO Extract to separate class (ThumbnailManager).
         $local_path = realpath(dirname(__FILE__)) . '/../../../';
@@ -89,5 +121,4 @@ class Grabber
 
         return $films;
     }
-
 }
