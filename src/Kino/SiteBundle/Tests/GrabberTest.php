@@ -188,7 +188,7 @@ class GrabberTest extends PHPUnit_Framework_TestCase
         // Сюда можно подсунуть и фабрику грабберов ещё, но пока это перебор, и есть доверие к вендору.
         $grabber = new Grabber($browser);
 
-        $films = $grabber->getSite();
+        $grabber->getSite();
     }
 
     /**

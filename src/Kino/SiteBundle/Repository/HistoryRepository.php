@@ -11,7 +11,7 @@ class HistoryRepository extends EntityRepository
     /**
      * Метод формирует массив фильтра/сортировки для запроса по входным
      * параметрам с сайта
-     * 
+     *
      * @param type $field
      * @param type $ord
      * @return string
@@ -45,17 +45,17 @@ class HistoryRepository extends EntityRepository
     /**
      * Метод получает список фильмов из базы данных по заданным входным
      * параметрам
-     * 
-     * @param type $getDates
-     * @param type $orders
-     * @return type
+     *
+     * @param  array $getDates
+     * @param  array $orders
+     *
+     * @return array
      */
-    public function getFilm($getDates,
-                            $orders = array('SortField'=>'', 'SortOrder'=>''))
+    public function getFilm($getDates, $orders = array('SortField' => '', 'SortOrder' => ''))
     {
         $repository = $this
                         ->getEntityManager();
-        $ord = $this->getOrder($orders['SortField'], $orders['SortOrder']);
+        $order = $this->getOrder($orders['SortField'], $orders['SortOrder']);
         $query = $repository->createQueryBuilder('h')
                             ->select(array('h.historyPosition',
                                            'h.historyVotes',
@@ -70,17 +70,18 @@ class HistoryRepository extends EntityRepository
                             ->where("h.film = f.id")
                             ->andWhere("h.historyDate = :historyDate")
                             ->setParameter('historyDate', $getDates)
-                            ->addOrderBy($ord['field'], $ord['order'])
+                            ->addOrderBy($order['field'], $order['order'])
                             ->getQuery()
                             ->useResultCache(true, 300)
                             ;
+
         return $query->getResult();
     }
 
     /**
      * Метод проверяет наличие фильма в базе,
      * ID фильма по передаваемым параметрам (название и год выпуска)
-     * 
+     *
      * @param type $data
      * @return type
      */
@@ -109,7 +110,7 @@ class HistoryRepository extends EntityRepository
     /**
      * Метод проверяет наличие истории для конкретного фильма на заданную дату,
      * ID фильма по передаваемым параметрам (фильм ID и ДатаИстории)
-     * 
+     *
      * @param type $data
      * @return type
      */

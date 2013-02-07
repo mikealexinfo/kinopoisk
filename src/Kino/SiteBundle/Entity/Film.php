@@ -3,16 +3,13 @@
 namespace Kino\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\UniqueConstraint;
-use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="film",
- *           uniqueConstraints={@UniqueConstraint(name="films_name_uniq",columns={"filmName","filmYear"})}
+ * @ORM\Table(
+ *     name="film",
+ *     uniqueConstraints={@ORM\UniqueConstraint(name="films_name_uniq",columns={"filmName","filmYear"})}
  * )
- *
- * Kino\SiteBundle\Entity\Film
  */
 class Film
 {
@@ -40,12 +37,11 @@ class Film
     private $filmYear;
 
     /**
-    * @OneToMany(targetEntity="History", mappedBy="film_id")
+    * @ORM\OneToMany(targetEntity="History", mappedBy="film")
     */
-    private $history;
+    private $histories;
 
     /**
-     *
      * Get id
      *
      * @return integer
@@ -100,5 +96,4 @@ class Film
     {
         return $this->filmYear;
     }
-
 }

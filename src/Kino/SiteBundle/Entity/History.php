@@ -3,17 +3,13 @@
 namespace Kino\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\UniqueConstraint;
-use Doctrine\ORM\Mapping\ManyToOne;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="history",
- *           uniqueConstraints={@UniqueConstraint(name="hist_film_uniq",columns={"historyDate","filmId"})}
+ * @ORM\Table(
+ *     name="history",
+ *     uniqueConstraints={@ORM\UniqueConstraint(name="hist_film_uniq", columns={"historyDate","film_id"})}
  * )
  * @ORM\Entity(repositoryClass="Kino\SiteBundle\Repository\HistoryRepository")
- *
- * Kino\SiteBundle\Entity\History
  */
 class History
 {
@@ -29,10 +25,7 @@ class History
     /**
      * @var Users
      *
-     * @ManyToOne(targetEntity="Film", inversedBy="history")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="filmId", referencedColumnName="id")
-     * })
+     * @ORM\ManyToOne(targetEntity="Film", inversedBy="histories")
      */
     private $film;
 
