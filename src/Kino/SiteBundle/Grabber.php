@@ -106,12 +106,31 @@ class Grabber
             $string = iconv('utf-8', 'cp1252', $string);
             $string = iconv('cp1251', 'utf-8', $string);
 
-            $linkParts         = preg_split('/\//', $link);
-            $imageUrl          = 'http://st.kinopoisk.ru/images/film_big/' . $linkParts[2] . '.jpg';
+            $linkParts = preg_split('/\//', $link);
             $imageThumbnailUrl = 'http://st.kinopoisk.ru/images/film/' . $linkParts[2] . '.jpg';
 
-            copy($imageThumbnailUrl, $localPath . 'web/tmp/temp' . $linkParts[2] . '.jpg');
-            copy($imageUrl, $localPath . 'web/tmp/temp_big' . $linkParts[2] . '.jpg');
+            $thumbFile = $this->browser->get($imageThumbnailUrl);
+            if ($thumbFile->isOk()) {
+                if ( file_put_contents($localPath . 'web/tmp/temp' . $linkParts[2] . '.jpg', $thumbFile->getContent()) > 0 ) {
+                    echo 'File "'.$imageThumbnailUrl.'" downloaded.' .chr(10);
+                } else {
+                    throw new \RuntimeException('Error file write "'.$imageThumbnailUrl.'" in site kinopoisk.ru.');
+                }
+            } else {
+                throw new \RuntimeException('No such file "'.$imageThumbnailUrl.'" in site kinopoisk.ru.');
+            }
+            
+            $imageUrl = 'http://st.kinopoisk.ru/images/film_big/' . $linkParts[2] . '.jpg';
+            $bigFile = $this->browser->get($imageUrl);
+            if ($bigFile->isOk()) {
+                if ( file_put_contents($localPath . 'web/tmp/temp_big' . $linkParts[2] . '.jpg', $bigFile->getContent()) > 0 ) {
+                    echo 'File "'.$imageUrl.'" downloaded.' .chr(10);
+                } else {
+                    throw new \RuntimeException('Error file write "'.$imageUrl.'" in site kinopoisk.ru.');
+                }
+            } else {
+                throw new \RuntimeException('No such file "'.$imageUrl.'" in site kinopoisk.ru.');
+            }
 
             $films[$i - 1] = array(
                 'film_pos'        => trim($matches[0])
@@ -126,7 +145,7 @@ class Grabber
                 , 'local'         => $localPath . 'web/bundles/kinosite/img_site/'
             );
         }
-
+        
         return $films;
     }
 }

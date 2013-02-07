@@ -1,6 +1,6 @@
 <?php
 
-namespace Kino\SiteBundle\Tests\Controller;
+namespace Kino\SiteBundle\Tests\Entity;
 
 require_once 'PHPUnit/Framework/Assert/Functions.php';
 
